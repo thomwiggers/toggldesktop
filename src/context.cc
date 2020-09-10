@@ -1563,10 +1563,10 @@ error Context::fetchMessage(const bool periodic) {
         }
 
         // To test in-app message fetch in development, comment this block out:
-        if ("production" != environment_) {
-            logger.debug("Not in production, will not fetch in-app messages");
-            return noError;
-        }
+//        if ("production" != environment_) {
+//            logger.debug("Not in production, will not fetch in-app messages");
+//            return noError;
+//        }
 
         // Load last showed message id
         Poco::Int64 old_id(0);
@@ -1590,7 +1590,7 @@ error Context::fetchMessage(const bool periodic) {
             if ("production" != environment_) {
                 // testing location
                 req.host = "https://raw.githubusercontent.com";
-                req.relative_url = "/toggl-open-source/toggldesktop/rebranding/post-rebranding-notification/releases/message.json";
+                req.relative_url = "/toggl-open-source/toggldesktop/tmp/timer-survey-demo/releases/message.json";
             } else {
                 req.host = "https://raw.githubusercontent.com";
                 req.relative_url = "/toggl-open-source/toggldesktop/master/releases/message.json";
@@ -1627,9 +1627,9 @@ error Context::fetchMessage(const bool periodic) {
             appversion = root["appversion"].asString();
 
             // check if message id is bigger than the saved one
-            if (old_id >= messageID) {
-                return noError;
-            }
+//            if (old_id >= messageID) {
+//                return noError;
+//            }
 
             // check appversion and version compare type
             if (!appversion.empty()) {

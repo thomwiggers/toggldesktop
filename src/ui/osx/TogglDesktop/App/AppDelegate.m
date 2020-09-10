@@ -1868,7 +1868,10 @@ void on_display_message(const char *title,
                                                        subTitle:[NSString stringWithUTF8String:text]
                                                     buttonTitle:[NSString stringWithUTF8String:button]
                                                       urlAction:[NSString stringWithUTF8String:url]];
-    [[NSNotificationCenter defaultCenter] postNotificationOnMainThread:kStartDisplayInAppMessage object:message];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationOnMainThread:kStartDisplayInAppMessage object:message];
+    });
 
 }
 
